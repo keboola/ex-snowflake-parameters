@@ -1,7 +1,7 @@
 {
-    "name": "fill-me-in/fill-me-in",
+    "name": "keboola/ex-snowflake-parameters",
     "license": "MIT",
-    "description": "fill-me-in",
+    "description": "Fetch Snowflake account parameters.",
     "type": "project",
     "require": {
         "PHP": "^7.1",
@@ -18,12 +18,12 @@
     },
     "autoload": {
         "psr-4": {
-            "MyComponent\\": "src/"
+            "Keboola\\SnowflakeParametersExtractor\\": "src/"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "MyComponent\\Tests\\": "tests/phpunit/"
+            "Keboola\\SnowflakeParametersExtractor\\Tests\\": "tests/phpunit/"
         }
     },
     "scripts": {
@@ -52,5 +52,4 @@
         "sort-packages": true,
         "optimize-autoloader": true
     }
-
 }
