@@ -13,6 +13,7 @@ COPY docker/composer-install.sh /tmp/composer-install.sh
 RUN apt-get update && apt-get install -y --no-install-recommends \
         git \
         unzip \
+        unixodbc \
         unixodbc-dev \
 	&& rm -r /var/lib/apt/lists/* \
 	&& chmod +x /tmp/composer-install.sh \
@@ -28,6 +29,10 @@ RUN set -x \
     && ./configure --with-unixODBC=shared,/usr \
     && docker-php-ext-install odbc \
     && docker-php-source delete
+
+ADD ./docker/snowflake-odbc.deb /tmp/snowflake-odbc.deb
+RUN dpkg -i /tmp/snowflake-odbc.deb
+ADD ./docker/simba.snowflake.ini /usr/lib/snowflake/odbc/lib/simba.snowflake.ini
 
 ## Composer - deps always cached unless changed
 # First copy only composer files
