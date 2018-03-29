@@ -4,9 +4,7 @@
 
 Fetch snowflake account parameters
 
-# Usage
 
-> fill in usage instructions
 
 ## Development
  
@@ -14,9 +12,22 @@ Clone this repository and init the workspace with following command:
 
 ```
 git clone https://github.com/keboola/ex-snowflake-parameters
-cd my-component
+cd ex-snowflake-parameters
 docker-compose build
 docker-compose run --rm dev composer install --no-scripts
+```
+
+Prepare snowflake user for tests:
+```sql
+create user your_name_ex_account_params  PASSWORD = 'your_password';
+```
+
+Create `.env` file:
+```
+SNOWFLAKE_HOST=
+SNOWFLAKE_USER=
+SNOWFLAKE_PASSWORD=
+
 ```
 
 Run the test suite using this command:
