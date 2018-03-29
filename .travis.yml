@@ -7,6 +7,14 @@ services:
 
 before_script:
   - docker -v
+  # download Snowflake drivers
+  >-
+    docker
+    run
+    -e AWS_ACCESS_KEY_ID
+    -e AWS_SECRET_ACCESS_KEY
+    quay.io/keboola/aws-cli
+    s3 cp s3://keboola-configs/drivers/snowflake/snowflake-odbc-2.14.0.x86_64.deb ./docker/snowflake-odbc-2.14.0.x86_64.deb
   - docker build -t $APP_IMAGE .
   - docker run $APP_IMAGE composer ci
 
