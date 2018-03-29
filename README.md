@@ -1,8 +1,8 @@
-# my-component
+# Snowflake Parameters Extractors
 
-[![Build Status](https://travis-ci.org/keboola/my-component.svg?branch=master)](https://travis-ci.org/keboola/my-component)
+[![Build Status](https://travis-ci.org/keboola/ex-snowflake-parameters.svg?branch=master)](https://travis-ci.org/keboola/ex-snowflake-parameters)
 
-> Fill in description
+Fetch snowflake account parameters
 
 # Usage
 
@@ -13,7 +13,7 @@
 Clone this repository and init the workspace with following command:
 
 ```
-git clone https://github.com/keboola/my-component
+git clone https://github.com/keboola/ex-snowflake-parameters
 cd my-component
 docker-compose build
 docker-compose run --rm dev composer install --no-scripts
