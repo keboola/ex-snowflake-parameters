@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Keboola\SnowflakeParametersExtractor\Tests;
 
 use Keboola\Db\Import\Snowflake\Connection;
@@ -9,7 +11,7 @@ use PHPUnit\Framework\TestCase;
 class ParametersFetcherTest extends TestCase
 {
 
-    public function testFetchParameters()
+    public function testFetchParameters(): void
     {
         $connection = new Connection([
             'host' => getenv('SNOWFLAKE_HOST'),
