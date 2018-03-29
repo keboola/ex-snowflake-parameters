@@ -29,12 +29,9 @@
     },
     "scripts": {
         "tests-phpunit": "phpunit",
-        "tests-functional": "php ./tests/functional/run.php",
         "tests": [
-            "@tests-phpunit",
-            "@tests-functional"
+            "@tests-phpunit"
         ],
-
         "phpstan": "phpstan analyse ./src ./tests --level=max --no-progress -c phpstan.neon",
         "phpcs": "phpcs -n --ignore=vendor --extensions=php .",
         "phpcbf": "phpcbf -n --ignore=vendor --extensions=php .",
