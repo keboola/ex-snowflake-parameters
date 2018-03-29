@@ -2,8 +2,6 @@
 
 namespace Keboola\SnowflakeParametersExtractor\Tests;
 
-
-
 use Keboola\Db\Import\Snowflake\Connection;
 use Keboola\SnowflakeParametersExtractor\ParametersFetcher;
 use PHPUnit\Framework\TestCase;
