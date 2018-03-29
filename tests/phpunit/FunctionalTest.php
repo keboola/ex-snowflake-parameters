@@ -18,7 +18,7 @@ class FunctionalTest extends TestCase
      */
     private $temp;
 
-    public function setUp()/* The :void return type declaration that should be here would cause a BC issue */
+    public function setUp(): void
     {
         parent::setUp();
 
@@ -26,7 +26,7 @@ class FunctionalTest extends TestCase
         $this->temp->initRunFolder();
     }
 
-    public function testSuccessfulRun()
+    public function testSuccessfulRun(): void
     {
         $fileSystem = new Filesystem();
         $fileSystem->mkdir($this->temp->getTmpFolder() . '/out/tables');
