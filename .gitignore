@@ -1,4 +1,4 @@
 /vendor
 /.idea
-/docker/snowflake-odbc-*
+/docker/snowflake-odbc.deb
 .env
