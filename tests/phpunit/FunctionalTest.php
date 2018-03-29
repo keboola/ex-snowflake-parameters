@@ -8,6 +8,8 @@ use Keboola\Temp\Temp;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\Process\Process;
+use Symfony\Component\Serializer\Encoder\JsonDecode;
+use Symfony\Component\Serializer\Encoder\JsonEncoder;
 
 class FunctionalTest extends TestCase
 {
@@ -20,7 +22,7 @@ class FunctionalTest extends TestCase
     {
         parent::setUp();
 
-        $this->temp = new Temp("component");
+        $this->temp = new Temp('component');
         $this->temp->initRunFolder();
     }
 
@@ -44,5 +46,19 @@ class FunctionalTest extends TestCase
         $runProcess->mustRun();
 
         $this->assertFileExists($this->temp->getTmpFolder() . '/out/tables/account-parameters.csv');
+        $manifestFilePath = $this->temp->getTmpFolder() . '/out/tables/account-parameters.csv.manifest';
+        $this->assertFileExists($manifestFilePath);
+
+        $expectedManifest = [
+            'destination' => '',
+            'primary_key' => ['key'],
+            'delimiter' => ',',
+            'enclosure' => '"',
+            'columns' => ['key','value','default','level','description'],
+            'incremental' => false,
+            "metadata" => [],
+            "column_metadata" => [],
+        ];
+        $this->assertEquals($expectedManifest, (new JsonDecode(true))->decode(file_get_contents($manifestFilePath), JsonEncoder::FORMAT));
     }
 }

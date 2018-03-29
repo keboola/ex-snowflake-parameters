@@ -18,10 +18,19 @@ class Component extends BaseComponent
         $parameters = $parametersFetcher->fetchAccountParameters();
 
         $csvFile = new CsvFile($this->getAccountParametersTableDestination());
-        $csvFile->writeRow(array_keys($parameters[0]));
         foreach ($parameters as $parameter) {
             $csvFile->writeRow($parameter);
         }
+
+        $this->getManifestManager()->writeTableManifestFromArray(
+            $this->getAccountParametersTableDestination(),
+            [
+                'primary_key' => [
+                    'key',
+                ],
+                'columns' => array_keys($parameters[0]),
+            ]
+        );
     }
 
     private function createSnowflakeConnection(): Connection
