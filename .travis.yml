@@ -16,7 +16,14 @@ before_script:
     quay.io/keboola/aws-cli
     s3 cp s3://keboola-configs/drivers/snowflake/snowflake-odbc-2.14.0.x86_64.deb ./docker/snowflake-odbc.deb
   - docker build -t $APP_IMAGE .
-  - docker run $APP_IMAGE composer ci
+  - >-
+    docker
+    run
+    -e SNOWFLAKE_HOST
+    -e SNOWFLAKE_USER
+    -e SNOWFLAKE_PASSWORD
+    $APP_IMAGE
+    composer ci
 
   # push test image to ECR
   - docker pull quay.io/keboola/developer-portal-cli-v2:latest
