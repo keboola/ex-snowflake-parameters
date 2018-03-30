@@ -13,6 +13,11 @@ Clone this repository and init the workspace with following command:
 ```
 git clone https://github.com/keboola/ex-snowflake-parameters
 cd ex-snowflake-parameters
+```
+
+Download latest [Snowflake DEB ODBC drivers](https://docs.snowflake.net/manuals/user-guide/odbc-download.html) as save it to `./docker/snowflake-odbc.deb`.
+
+```
 docker-compose build
 docker-compose run --rm dev composer install --no-scripts
 ```
