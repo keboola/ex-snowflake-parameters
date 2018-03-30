@@ -41,7 +41,7 @@ class Component extends BaseComponent
         /** @var Config $config */
         $config = $this->getConfig();
         return array_map(
-            function(array $parameter) use ($config) {
+            function (array $parameter) use ($config) {
                 return array_merge(
                     [
                         'host' => $config->getHost(),
