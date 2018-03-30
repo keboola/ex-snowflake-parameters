@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Keboola\SnowflakeParametersExtractor\Tests;
 
+use Keboola\Csv\CsvFile;
 use Keboola\Temp\Temp;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\Filesystem\Filesystem;
@@ -45,20 +46,33 @@ class FunctionalTest extends TestCase
         $runProcess = new  Process($runCommand);
         $runProcess->mustRun();
 
-        $this->assertFileExists($this->temp->getTmpFolder() . '/out/tables/account-parameters.csv');
-        $manifestFilePath = $this->temp->getTmpFolder() . '/out/tables/account-parameters.csv.manifest';
-        $this->assertFileExists($manifestFilePath);
+        $outputCsvFilePath = $this->temp->getTmpFolder() . '/out/tables/account-parameters.csv';
+        $this->assertFileExists($outputCsvFilePath);
+        $this->assertCount(6, (new CsvFile($outputCsvFilePath))->getHeader());
+
+        $outputManifestFilePath = $this->temp->getTmpFolder() . '/out/tables/account-parameters.csv.manifest';
+        $this->assertFileExists($outputManifestFilePath);
 
         $expectedManifest = [
             'destination' => '',
-            'primary_key' => ['key'],
+            'primary_key' => [
+                'host',
+                'key',
+            ],
             'delimiter' => ',',
             'enclosure' => '"',
-            'columns' => ['key','value','default','level','description'],
+            'columns' => [
+                'host',
+                'key',
+                'value',
+                'default',
+                'level',
+                'description',
+            ],
             'incremental' => false,
             "metadata" => [],
             "column_metadata" => [],
         ];
-        $this->assertEquals($expectedManifest, (new JsonDecode(true))->decode(file_get_contents($manifestFilePath), JsonEncoder::FORMAT));
+        $this->assertEquals($expectedManifest, (new JsonDecode(true))->decode(file_get_contents($outputManifestFilePath), JsonEncoder::FORMAT));
     }
 }

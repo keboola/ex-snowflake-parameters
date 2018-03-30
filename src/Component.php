@@ -15,7 +15,9 @@ class Component extends BaseComponent
     public function run(): void
     {
         $parametersFetcher = new ParametersFetcher($this->createSnowflakeConnection());
-        $parameters = $parametersFetcher->fetchAccountParameters();
+        $parameters = $this->addHostToParameters(
+            $parametersFetcher->fetchAccountParameters()
+        );
 
         $csvFile = new CsvFile($this->getAccountParametersTableDestination());
         foreach ($parameters as $parameter) {
@@ -26,10 +28,28 @@ class Component extends BaseComponent
             $this->getAccountParametersTableDestination(),
             [
                 'primary_key' => [
+                    'host',
                     'key',
                 ],
                 'columns' => array_keys($parameters[0]),
             ]
+        );
+    }
+
+    private function addHostToParameters(array $parameters): array
+    {
+        /** @var Config $config */
+        $config = $this->getConfig();
+        return array_map(
+            function(array $parameter) use ($config) {
+                return array_merge(
+                    [
+                        'host' => $config->getHost(),
+                    ],
+                    $parameter
+                );
+            },
+            $parameters
         );
     }
 
