@@ -2,9 +2,14 @@
 
 [![Build Status](https://travis-ci.org/keboola/ex-snowflake-parameters.svg?branch=master)](https://travis-ci.org/keboola/ex-snowflake-parameters)
 
-Fetch snowflake account parameters
+The extractor fetches Snowflake account [parameters](https://docs.snowflake.net/manuals/sql-reference/parameters.html).
+Snowflake account name (host) is also stored with each parameter.
 
+Output example:
 
+host | key | value | default | level | description
+---- | --- | ----- | ----- | ------ | ----
+kebooladev.snowflakecomputing.com | SSO_LOGIN_PAGE | false | false | | Enable federated authentication for console login and redirects preview page to console login
 
 ## Development
  
