@@ -1,0 +1,30 @@
+{
+  "title": "Snowflake Credentials",
+  "type": "object",
+  "required": [
+    "host",
+    "username",
+    "#password"
+  ],
+  "properties": {
+    "host": {
+      "type": "string",
+      "title": "Hostname",
+      "default": "",
+      "minLength": 1
+    },
+    "username": {
+      "type": "string",
+      "title": "Username",
+      "default": "",
+      "minLength": 1
+    },
+    "#password": {
+      "type": "string",
+      "title": "Password",
+      "format": "password",
+      "default": "",
+      "minLength": 1
+    }
+  }
+}
